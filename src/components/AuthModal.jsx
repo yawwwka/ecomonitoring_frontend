@@ -4,7 +4,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }) {
     const [isLogin, setIsLogin] = useState(true);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [telegramId, setTelegramId] = useState('');
+    const [messengerId, setMessengerId] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
@@ -16,7 +16,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }) {
         setLoading(true);
 
         const url = isLogin ? 'http://localhost:8080/api/auth/login' : 'http://localhost:8080/api/auth/register';
-        const body = isLogin ? { email, password } : { email, password, telegramId };
+        const body = isLogin ? { email, password } : { email, password, messengerId };
 
         try {
             const response = await fetch(url, {
@@ -107,9 +107,9 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }) {
                     {!isLogin && (
                         <input
                             type="text"
-                            placeholder="Telegram ID (опционально)"
-                            value={telegramId}
-                            onChange={(e) => setTelegramId(e.target.value)}
+                            placeholder="VK ID (опционально)"
+                            value={messengerId}
+                            onChange={(e) => setMessengerId(e.target.value)}
                             style={{
                                 width: '100%',
                                 padding: '12px',

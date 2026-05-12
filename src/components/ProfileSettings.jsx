@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export default function ProfileSettings({ isOpen, onClose, userEmail, token, onUpdate }) {
-    const [telegramId, setTelegramId] = useState('');
+    const [messengerId, setMessengerId] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -20,8 +20,8 @@ export default function ProfileSettings({ isOpen, onClose, userEmail, token, onU
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const data = await response.json();
-            if (response.ok && data.telegramId) {
-                setTelegramId(data.telegramId);
+            if (response.ok && data.messengerId) {
+                setMessengerId(data.messengerId);
             }
         } catch (error) {
             console.error('Ошибка загрузки профиля:', error);
@@ -41,7 +41,7 @@ export default function ProfileSettings({ isOpen, onClose, userEmail, token, onU
         }
 
         const updateData = {};
-        if (telegramId !== undefined) updateData.telegramId = telegramId;
+        if (messengerId !== undefined) updateData.messengerId = messengerId;
         if (newPassword) updateData.password = newPassword;
 
         if (Object.keys(updateData).length === 0) {
@@ -117,12 +117,12 @@ export default function ProfileSettings({ isOpen, onClose, userEmail, token, onU
 
                 <form onSubmit={handleSubmit}>
                     <div style={{ marginBottom: '15px' }}>
-                        <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#333' }}>Telegram ID</label>
+                        <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#333' }}>VK ID</label>
                         <input
                             type="text"
-                            value={telegramId}
-                            onChange={(e) => setTelegramId(e.target.value)}
-                            placeholder="Ваш Telegram ID"
+                            value={messengerId}
+                            onChange={(e) => setMessengerId(e.target.value)}
+                            placeholder="Ваш VK ID"
                             style={{
                                 width: '100%',
                                 padding: '12px',
@@ -133,7 +133,7 @@ export default function ProfileSettings({ isOpen, onClose, userEmail, token, onU
                             }}
                         />
                         <div style={{ fontSize: '11px', color: '#666', marginTop: '4px' }}>
-                            Для получения уведомлений в Telegram
+                            Для получения уведомлений в VK
                         </div>
                     </div>
 

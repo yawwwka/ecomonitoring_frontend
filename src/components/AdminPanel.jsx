@@ -207,7 +207,7 @@ export default function AdminPanel({ isOpen, onClose, token, currentUserEmail })
                                 <tr style={{ backgroundColor: '#f0f0f0', position: 'sticky', top: 0 }}>
                                     <th style={{ padding: '12px', textAlign: 'left', color: '#333', backgroundColor: '#f0f0f0' }}>ID</th>
                                     <th style={{ padding: '12px', textAlign: 'left', color: '#333', backgroundColor: '#f0f0f0' }}>Email</th>
-                                    <th style={{ padding: '12px', textAlign: 'left', color: '#333', backgroundColor: '#f0f0f0' }}>Telegram</th>
+                                    <th style={{ padding: '12px', textAlign: 'left', color: '#333', backgroundColor: '#f0f0f0' }}>VK</th>
                                     <th style={{ padding: '12px', textAlign: 'left', color: '#333', backgroundColor: '#f0f0f0' }}>Роль</th>
                                     <th style={{ padding: '12px', textAlign: 'left', color: '#333', backgroundColor: '#f0f0f0' }}>Действия</th>
                                 </tr>
@@ -222,7 +222,7 @@ export default function AdminPanel({ isOpen, onClose, token, currentUserEmail })
                                                 <span style={{ fontSize: '11px', color: '#999', marginLeft: '8px' }}>(вы)</span>
                                             )}
                                         </td>
-                                        <td style={{ padding: '12px', color: '#333' }}>{user.telegramId || '-'}</td>
+                                        <td style={{ padding: '12px', color: '#333' }}>{user.messengerId || '-'}</td>
                                         <td style={{ padding: '12px' }}>
                                             <select
                                                 value={user.role}

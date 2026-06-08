@@ -1,3 +1,3 @@
-const API_URL = import.meta.env.REACT_API_URL || 'http://localhost:8080';
+const API_URL = `yawwwka-ecomonitoring-backend-1b9e.twc1.net`;
 
 export default API_URL;

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import API_URL from "../config.js";
 
 export default function AdminPanel({ isOpen, onClose, token, currentUserEmail }) {
     const [users, setUsers] = useState([]);
@@ -12,7 +13,7 @@ export default function AdminPanel({ isOpen, onClose, token, currentUserEmail })
 
     const fetchUsers = async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/admin/users', {
+            const response = await fetch(`${API_URL}/api/admin/users`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const data = await response.json();
@@ -31,7 +32,7 @@ export default function AdminPanel({ isOpen, onClose, token, currentUserEmail })
         }
         if (!confirm('Удалить пользователя?')) return;
         try {
-            const response = await fetch(`http://localhost:8080/api/admin/users/${userId}`, {
+            const response = await fetch(`${API_URL}/api/admin/users/${userId}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -53,7 +54,7 @@ export default function AdminPanel({ isOpen, onClose, token, currentUserEmail })
             return;
         }
         try {
-            const response = await fetch(`http://localhost:8080/api/admin/users/${userId}/role`, {
+            const response = await fetch(`${API_URL}/api/admin/users/${userId}/role`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -84,7 +85,7 @@ export default function AdminPanel({ isOpen, onClose, token, currentUserEmail })
 
     const fetchInterval = async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/admin/settings/interval', {
+            const response = await fetch(`${API_URL}/api/admin/settings/interval`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const data = await response.json();
@@ -99,7 +100,7 @@ export default function AdminPanel({ isOpen, onClose, token, currentUserEmail })
     const updateInterval = async (minutes) => {
         setIntervalLoading(true);
         try {
-            const response = await fetch('http://localhost:8080/api/admin/settings/interval', {
+            const response = await fetch(`${API_URL}/api/admin/settings/interval`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -125,7 +126,7 @@ export default function AdminPanel({ isOpen, onClose, token, currentUserEmail })
 
     const fetchNextCollection = async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/admin/next-collection', {
+            const response = await fetch(`${API_URL}/api/admin/next-collection`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const data = await response.json();

@@ -13,9 +13,9 @@ import { Line } from 'react-chartjs-2';
 import AuthModal from './AuthModal';
 import ProfileSettings from './ProfileSettings';
 import AdminPanel from "./AdminPanel.jsx";
-import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import 'jspdf-autotable';
+import API_URL from './config';
 
 ChartJS.register(
     CategoryScale,
@@ -110,7 +110,7 @@ export default function YandexMapComponent() {
     const exportCSV = async () => {
         if (!selectedCityInfo) return;
         try {
-            const response = await fetch(`http://localhost:8080/api/air/history/export/${selectedCityInfo.id}?days=${exportDays}`, {
+            const response = await fetch(`${API_URL}/api/air/history/export/${selectedCityInfo.id}?days=${exportDays}`, {
                 headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
             });
             const blob = await response.blob();
@@ -179,7 +179,7 @@ export default function YandexMapComponent() {
 
         try {
             // Загружаем историю за выбранный период
-            const response = await fetch(`http://localhost:8080/api/air/history/${selectedCityInfo.id}/period?days=${exportDays}`, {
+            const response = await fetch(`${API_URL}/api/air/history/${selectedCityInfo.id}/period?days=${exportDays}`, {
                 headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
             });
             const fullHistory = await response.json();
@@ -456,7 +456,7 @@ export default function YandexMapComponent() {
         setCurrentCoords([lat, lon]);
 
         try {
-            const url = `http://localhost:8080/api/air?lat=${lat}&lon=${lon}`;
+            const url = `${API_URL}/api/air?lat=${lat}&lon=${lon}`;
             const response = await fetch(url);
             if (!response.ok) throw new Error(`Ошибка HTTP: ${response.status}`);
             const data = await response.json();
@@ -471,7 +471,7 @@ export default function YandexMapComponent() {
 
     const fetchCityHistory = async (cityId, cityName) => {
         try {
-            const url = `http://localhost:8080/api/air/history/${cityId}`;
+            const url = `${API_URL}/api/air/history/${cityId}`;
             const response = await fetch(url);
             const data = await response.json();
             setCityHistory(data);
@@ -484,7 +484,7 @@ export default function YandexMapComponent() {
 
     const fetchNearestCity = async (lat, lon) => {
         try {
-            const response = await fetch(`http://localhost:8080/api/air/nearest-city?lat=${lat}&lon=${lon}`);
+            const response = await fetch(`${API_URL}/api/air/nearest-city?lat=${lat}&lon=${lon}`);
             const city = await response.json();
             if (city && city.id) {
                 setSelectedCityInfo(city);
@@ -550,7 +550,7 @@ export default function YandexMapComponent() {
         }
 
         try {
-            const response = await fetch(`http://localhost:8080/api/air/cities/search?query=${encodeURIComponent(query)}`);
+            const response = await fetch(`${API_URL}/api/air/cities/search?query=${encodeURIComponent(query)}`);
             const data = await response.json();
             setSearchResults(data);
             setShowResults(true);

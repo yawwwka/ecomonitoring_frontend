@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import API_URL from "../config.js";
 
 export default function ProfileSettings({ isOpen, onClose, userEmail, token, onUpdate }) {
     const [messengerId, setMessengerId] = useState('');
@@ -16,7 +17,7 @@ export default function ProfileSettings({ isOpen, onClose, userEmail, token, onU
 
     const fetchCurrentUser = async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/auth/me', {
+            const response = await fetch(`${API_URL}/api/auth/me`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const data = await response.json();
@@ -51,7 +52,7 @@ export default function ProfileSettings({ isOpen, onClose, userEmail, token, onU
         }
 
         try {
-            const response = await fetch('http://localhost:8080/api/auth/profile', {
+            const response = await fetch(`${API_URL}/api/auth/profile`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

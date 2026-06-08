@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import API_URL from "../config.js";
 
 export default function AuthModal({ isOpen, onClose, onLoginSuccess }) {
     const [isLogin, setIsLogin] = useState(true);
@@ -15,7 +16,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }) {
         setError('');
         setLoading(true);
 
-        const url = isLogin ? 'http://localhost:8080/api/auth/login' : 'http://localhost:8080/api/auth/register';
+        const url = isLogin ? `${API_URL}/api/auth/login` : `${API_URL}/api/auth/register`;
         const body = isLogin ? { email, password } : { email, password, messengerId };
 
         try {

@@ -15,7 +15,7 @@ import ProfileSettings from './ProfileSettings';
 import AdminPanel from "./AdminPanel.jsx";
 import html2canvas from 'html2canvas';
 import 'jspdf-autotable';
-import API_URL from './config';
+import API_URL from "../config";
 
 ChartJS.register(
     CategoryScale,

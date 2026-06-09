@@ -577,7 +577,11 @@ export default function YandexMapComponent() {
         map.geoObjects.add(newPlacemark);
 
         fetchAirQuality(city.latitude, city.longitude);
-        fetchNearestCity(city.latitude, city.longitude);
+        //fetchNearestCity(city.latitude, city.longitude);
+
+        //ЭТО ВСЕ ВРЕМЕННО
+        setSelectedCityInfo(city);
+        fetchCityHistory(city.id, city.name);
 
         setSearchQuery('');
         setSearchResults([]);
